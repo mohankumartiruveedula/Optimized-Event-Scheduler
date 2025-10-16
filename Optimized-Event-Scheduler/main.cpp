@@ -1,4 +1,47 @@
 #include <bits/stdc++.h>
+using namespace std;
+
+//core logic methods
+int ub(int index,std::vector<std::vector<int>>& events);
+int rec(int ind,int k,std::vector<std::vector<int>>& events,std::vector<std::vector<int>> &dp);
+std::vector<int> maxValue(std::vector<std::vector<int>> events, int k);
+
+//handler functions
+void addEvent(vector<vector<int>> &events,vector<string> &eventNames);
+void removeEvent(vector<vector<int>> &events,vector<string> &eventNames);
+void displayEvent(vector<vector<int>> &events,vector<string> &eventNames);
+void optimizeEvent(vector<vector<int>> &events,vector<string> &eventNames);
+
+int main(){
+    int choice = 0;
+    vector<vector<int>> events;
+    vector<string> eventNames;
+
+    while(choice!=5){
+        cout<<"               Optimized Event Scheduler              \n\n";
+        cout<<"Select Operation :-   \n";
+        cout<<"->1 Add Event\n";
+        cout<<"->2 Remove Event\n";
+        cout<<"->3 Display Events\n";
+        cout<<"->4 Optimize Events\n";
+        cout<<"->5 Exit";
+        cin>>choice;
+
+        switch(choice){
+            case 1:addEvent(events,eventNames);break;
+            case 2:removeEvent(events,eventNames);break;
+            case 3:displayEvent(events,eventNames);break;
+            case 4:optimizeEvent(events,eventNames);break;
+            case 5:break;
+            default:cout<<"\nPlease Select a valid option";
+        }
+
+        system("cls");
+    }
+
+    return 0;
+}
+
 
 int ub(int index,std::vector<std::vector<int>>& events){
     int req=events.size();
@@ -17,6 +60,7 @@ int ub(int index,std::vector<std::vector<int>>& events){
 
     return req;
 }
+
 
 int rec(int ind,int k,std::vector<std::vector<int>>& events,std::vector<std::vector<int>> &dp){
     if(ind>=events.size() || k==0){
@@ -59,9 +103,4 @@ std::vector<int> maxValue(std::vector<std::vector<int>> events, int k) {
 
 
     return res;
-}
-
-int main(){
-
-    return 0;
 }
