@@ -101,7 +101,7 @@ std::vector<int> maxValue(std::vector<std::vector<int>> events, int k) {
         int next = ub(a,events);
         if(next != n){pick += dp[next][b-1];}
         if(pick >= dp[a+1][b]){
-            res.push_back(events[a][3]);
+            res.push_back(events[a][4]);
             a=next;
             b--;
         }else{
@@ -149,12 +149,12 @@ void addEvent(){
         return;
     }
 
-    events.push_back({startDate,endDate,priority});
+    events.push_back({startDate,endDate,priority,eventId});
     eventNames.push_back(eventName);
     eventMap[eventId] = {events.end() - 1 , eventNames.end() - 1};
 
     system("cls");
-    cout<<"Event "<<eventId<<" added Successfully !!";
+    cout<<"Event Id "<<eventId<<" added Successfully !!";
     _getch();
 }
 
@@ -188,9 +188,25 @@ void removeEvent(){
     _getch();
 }
 
-
 void displayEvent(){
 
+    system("cls");
+
+    if(events.size()==0){
+        cout<<"No events exists !";
+        _getch();
+        return;
+    }
+
+
+    cout<<"Event Id    ||     Event Name     ||      Event Start Date     ||      Event End Date      ||             Event Priority\n";
+    cout<<"------------------------------------------------------------------------------------------------------------------------------------\n";
+    
+    for(int i=0 ; i < events.size() ; i++){
+        cout<<events[i][3]<<"   ||   "<<eventNames[i]<<"         ||          "<<events[i][0]<<"        ||          "<<events[i][1]<<"         ||            "<<events[i][2]<<endl;
+    }
+
+    _getch();
 }
 
 
@@ -203,4 +219,35 @@ void optimizeEvent(){
         _getch();
         return;
     }
+
+    int n = events.size();
+    int k = n;
+    cout<<"Enter Number of Events you want to attend (Maximum "<<n<<" ) :";
+    cin>>k;
+
+    if(k>0){
+        k = min(k,n);
+    }else{
+        system("cls");
+        cout<<"Please enter a valid number of Events !";
+        _getch();
+        return;
+    }
+
+    vector<int> result = maxValue(events,k);
+
+    system("sys");
+
+    cout<<"Events that on attending which are maximum benificial are :-\n\n";
+    cout<<"Event Id    ||     Event Name     ||      Event Start Date     ||      Event End Date      ||             Event Priority\n";
+    cout<<"------------------------------------------------------------------------------------------------------------------------------------\n";
+    
+    for(int i=1 ; i < result.size() ; i++){
+        cout<<events[result[i]][3]<<"  ||    "<<eventNames[result[i]]<<"         ||          "<<events[result[i]][0]<<"        ||          "<<events[result[i]][1]<<"         ||            "<<events[result[i]][2]<<endl;
+    }
+
+    cout<<"Total highest Priority value is "<<result[0];
+    cout<<endl;
+
+    _getch();
 }
