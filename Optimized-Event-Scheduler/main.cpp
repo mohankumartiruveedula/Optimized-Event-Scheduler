@@ -18,6 +18,7 @@ void addEvent();
 void removeEvent();
 void displayEvent();
 void optimizeEvent();
+void myexit();
 
 int main(){
 
@@ -36,7 +37,7 @@ int main(){
             case 2:removeEvent();break;
             case 3:displayEvent();break;
             case 4:optimizeEvent();break;
-            case 5:break;
+            case 5:myexit();break;
             default:cout<<"\nPlease Select a valid option";
         }
 
@@ -145,6 +146,7 @@ void addEvent(){
     if(startDate>endDate){
         system("cls");
         cout<<"Please Enter Valid dates";
+        cout<<"\nPress any key to continue...\n";
         _getch();
         return;
     }
@@ -154,16 +156,20 @@ void addEvent(){
     eventMap[eventId] = {events.end() - 1 , eventNames.end() - 1};
 
     system("cls");
+    cout<<"               Optimized Event Scheduler              \n\n";
     cout<<"Event Id "<<eventId<<" added Successfully !!";
+    cout<<"\nPress any key to continue...\n";
     _getch();
 }
 
 void removeEvent(){
     system("cls");
 
+    cout<<"               Optimized Event Scheduler              \n\n";
+
     if(events.size()==0){
-        system("cls");
         cout<<"There are No Events to delete";
+        cout<<"\nPress any key to continue...\n";
         _getch();
         return;
     }
@@ -175,8 +181,11 @@ void removeEvent(){
 
     if(!eventMap.count(eventId)){
         system("cls");
+        cout<<"               Optimized Event Scheduler              \n\n";
         cout<<"Event with "<<eventId<<" does not exist or may be deleted";
+        cout<<"\nPress any key to continue...\n";
         _getch();
+        return;
     }
 
     events.erase(eventMap[eventId].first);
@@ -184,7 +193,9 @@ void removeEvent(){
     eventMap.erase(eventId);
 
     system("cls");
+    cout<<"               Optimized Event Scheduler              \n\n";
     cout<<"Event "<<eventId<<" deleted Successfully !!";
+    cout<<"\nPress any key to continue...\n";
     _getch();
 }
 
@@ -192,8 +203,11 @@ void displayEvent(){
 
     system("cls");
 
+    cout<<"               Optimized Event Scheduler              \n\n";
+
     if(events.size()==0){
         cout<<"No events exists !";
+        cout<<"\nPress any key to continue...\n";
         _getch();
         return;
     }
@@ -206,16 +220,19 @@ void displayEvent(){
         cout<<events[i][3]<<"   ||   "<<eventNames[i]<<"         ||          "<<events[i][0]<<"        ||          "<<events[i][1]<<"         ||            "<<events[i][2]<<endl;
     }
 
+    cout<<"\nPress any key to continue...\n";
     _getch();
 }
-
 
 void optimizeEvent(){
 
     system("cls");
 
+    cout<<"               Optimized Event Scheduler              \n\n";
+
     if(events.size() == 0){
         cout<<"No Events to Optimize !";
+        cout<<"\nPress any key to continue...\n";
         _getch();
         return;
     }
@@ -229,14 +246,17 @@ void optimizeEvent(){
         k = min(k,n);
     }else{
         system("cls");
+        cout<<"               Optimized Event Scheduler              \n\n";
         cout<<"Please enter a valid number of Events !";
+        cout<<"\nPress any key to continue...\n";
         _getch();
         return;
     }
 
     vector<int> result = maxValue(events,k);
 
-    system("sys");
+    system("cls");
+    cout<<"               Optimized Event Scheduler              \n\n";
 
     cout<<"Events that on attending which are maximum benificial are :-\n\n";
     cout<<"Event Id    ||     Event Name     ||      Event Start Date     ||      Event End Date      ||             Event Priority\n";
@@ -246,8 +266,17 @@ void optimizeEvent(){
         cout<<events[result[i]][3]<<"  ||    "<<eventNames[result[i]]<<"         ||          "<<events[result[i]][0]<<"        ||          "<<events[result[i]][1]<<"         ||            "<<events[result[i]][2]<<endl;
     }
 
-    cout<<"Total highest Priority value is "<<result[0];
+    cout<<"\nTotal highest Priority value is "<<result[0];
     cout<<endl;
 
+    cout<<"\nPress any key to continue...\n";
+    _getch();
+}
+
+void myexit(){
+    system("cls");
+    cout<<"               Optimized Event Scheduler              \n\n";
+    cout<<"Application Exited Successfully !!";
+    cout<<"\nPress any key to continue...\n";
     _getch();
 }
